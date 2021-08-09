@@ -3,8 +3,15 @@ type MPH @entity {
   totalSupply: BigDecimal!
 }
 
+type xMPH @entity {
+  id: ID!
+  totalSupply: BigDecimal!
+  pricePerFullShare: BigDecimal!
+}
+
 type MPHHolder @entity {
   id: ID!
   address: String!
   mphBalance: BigDecimal!
+  xmphBalance: BigDecimal!
 }
