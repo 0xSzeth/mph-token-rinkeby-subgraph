@@ -28,3 +28,26 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
       file: MPHToken/MPHToken.wasm
+  - kind: ethereum/contract
+    name: xMPHToken
+    network: rinkeby
+    source:
+      address: "0x59EE65726f0b886Ec924271B51A3c1e78F52d1FB"
+      abi: XMPHToken
+      startBlock: 8735222
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+      abis:
+        - name: XMPHToken
+          file: xMPHToken/abis/XMPHToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: xMPHToken/xMPHToken.wasm

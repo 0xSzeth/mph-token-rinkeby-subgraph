@@ -52,6 +52,55 @@ export class MPH extends Entity {
   }
 }
 
+export class xMPH extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save xMPH entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save xMPH entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("xMPH", id.toString(), this);
+  }
+
+  static load(id: string): xMPH | null {
+    return store.get("xMPH", id) as xMPH | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalSupply(): BigDecimal {
+    let value = this.get("totalSupply");
+    return value.toBigDecimal();
+  }
+
+  set totalSupply(value: BigDecimal) {
+    this.set("totalSupply", Value.fromBigDecimal(value));
+  }
+
+  get pricePerFullShare(): BigDecimal {
+    let value = this.get("pricePerFullShare");
+    return value.toBigDecimal();
+  }
+
+  set pricePerFullShare(value: BigDecimal) {
+    this.set("pricePerFullShare", Value.fromBigDecimal(value));
+  }
+}
+
 export class MPHHolder extends Entity {
   constructor(id: string) {
     super();
@@ -98,5 +147,14 @@ export class MPHHolder extends Entity {
 
   set mphBalance(value: BigDecimal) {
     this.set("mphBalance", Value.fromBigDecimal(value));
+  }
+
+  get xmphBalance(): BigDecimal {
+    let value = this.get("xmphBalance");
+    return value.toBigDecimal();
+  }
+
+  set xmphBalance(value: BigDecimal) {
+    this.set("xmphBalance", Value.fromBigDecimal(value));
   }
 }
