@@ -1,6 +1,10 @@
-type ExampleEntity @entity {
+type MPH @entity {
   id: ID!
-  count: BigInt!
-  owner: Bytes! # address
-  spender: Bytes! # address
+  totalSupply: BigDecimal!
+}
+
+type MPHHolder @entity {
+  id: ID!
+  address: String!
+  mphBalance: BigDecimal!
 }
