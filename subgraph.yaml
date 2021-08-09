@@ -8,6 +8,7 @@ dataSources:
     source:
       address: "0xC79a56Af51Ec36738E965e88100e4570c5C77A93"
       abi: MPHToken
+      startBlock: 8735149
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
