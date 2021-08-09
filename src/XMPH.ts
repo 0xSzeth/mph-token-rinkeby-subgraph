@@ -45,6 +45,7 @@ export function handleTransfer(event: Transfer): void {
   let xmph = xMPH.load(XMPH_ID)
   if (xmph == null) {
     xmph = new xMPH(XMPH_ID)
+    xmph.address = event.address.toHex()
     xmph.totalSupply = ZERO_DEC
     xmph.pricePerFullShare = ONE_DEC
   }
