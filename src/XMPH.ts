@@ -3,11 +3,12 @@ import {
   XMPHToken,
   Approval,
   Transfer
-} from "../generated/XMPHToken/XMPHToken"
+} from "../generated/xMPHToken/XMPHToken"
 import { xMPH, MPHHolder } from "../generated/schema"
 
 const XMPH_ID = '0'
 const ZERO_DEC = BigDecimal.fromString('0')
+const ONE_DEC = BigDecimal.fromString('1')
 const ZERO_ADDR = Address.fromString('0x0000000000000000000000000000000000000000')
 
 export function tenPow(exponent: number): BigInt {
@@ -45,6 +46,7 @@ export function handleTransfer(event: Transfer): void {
   if (xmph == null) {
     xmph = new xMPH(XMPH_ID)
     xmph.totalSupply = ZERO_DEC
+    xmph.pricePerFullShare = ONE_DEC
   }
   xmph.save()
 
