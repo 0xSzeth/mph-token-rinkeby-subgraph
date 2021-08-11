@@ -1,4 +1,4 @@
-import { BigDecimal, BigInt, Address } from "@graphprotocol/graph-ts"
+import { BigDecimal, BigInt, Address, ethereum } from "@graphprotocol/graph-ts"
 import {
   XMPHToken,
   Approval,
@@ -6,10 +6,11 @@ import {
 } from "../generated/xMPHToken/XMPHToken"
 import { xMPH, MPHHolder } from "../generated/schema"
 
-const XMPH_ID = '0'
-const ZERO_DEC = BigDecimal.fromString('0')
-const ONE_DEC = BigDecimal.fromString('1')
-const ZERO_ADDR = Address.fromString('0x0000000000000000000000000000000000000000')
+let XMPH_ID = '0'
+let XMPH_ADDRESS = Address.fromString("0x59EE65726f0b886Ec924271B51A3c1e78F52d1FB")
+let ZERO_DEC = BigDecimal.fromString('0')
+let ONE_DEC = BigDecimal.fromString('1')
+let ZERO_ADDR = Address.fromString('0x0000000000000000000000000000000000000000')
 
 export function tenPow(exponent: number): BigInt {
   let result = BigInt.fromI32(1)
@@ -45,7 +46,6 @@ export function handleTransfer(event: Transfer): void {
   let xmph = xMPH.load(XMPH_ID)
   if (xmph == null) {
     xmph = new xMPH(XMPH_ID)
-    xmph.address = event.address.toHex()
     xmph.totalSupply = ZERO_DEC
     xmph.pricePerFullShare = ONE_DEC
   }
@@ -75,4 +75,27 @@ export function handleTransfer(event: Transfer): void {
     to.xmphBalance = to.xmphBalance.plus(value)
     to.save()
   }
+}
+
+export function handleBlock(block: ethereum.Block): void {
+  // find xMPH entity or create if if it does not exist yet
+  let xmph = xMPH.load(XMPH_ID)
+  if (xmph == null) {
+    xmph = new xMPH(XMPH_ID)
+    xmph.totalSupply = ZERO_DEC
+    xmph.pricePerFullShare = ONE_DEC
+  }
+  xmph.save()
+
+  let xmphContract = XMPHToken.bind(XMPH_ADDRESS)
+  let callResult = xmphContract.try_getPricePerFullShare()
+  if (callResult.reverted) {
+    //log.info('reverted', [])
+  } else {
+    let value = callResult.value
+    xmph.pricePerFullShare = normalize(value)
+  }
+
+
+  xmph.save()
 }

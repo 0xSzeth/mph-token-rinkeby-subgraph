@@ -7,9 +7,9 @@ import {
 } from "../generated/MPHToken/MPHToken"
 import { MPH, MPHHolder } from "../generated/schema"
 
-const MPH_ID = '0'
-const ZERO_DEC = BigDecimal.fromString('0')
-const ZERO_ADDR = Address.fromString('0x0000000000000000000000000000000000000000')
+let MPH_ID = '0'
+let ZERO_DEC = BigDecimal.fromString('0')
+let ZERO_ADDR = Address.fromString('0x0000000000000000000000000000000000000000')
 
 export function tenPow(exponent: number): BigInt {
   let result = BigInt.fromI32(1)

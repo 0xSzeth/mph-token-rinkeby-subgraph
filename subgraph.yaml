@@ -50,4 +50,6 @@ dataSources:
           handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+      blockHandlers:
+        - handler: handleBlock
       file: ./src/XMPH.ts
