@@ -99,6 +99,42 @@ export class xMPH extends Entity {
   set pricePerFullShare(value: BigDecimal) {
     this.set("pricePerFullShare", Value.fromBigDecimal(value));
   }
+
+  get totalRewardDistributed(): BigDecimal {
+    let value = this.get("totalRewardDistributed");
+    return value.toBigDecimal();
+  }
+
+  set totalRewardDistributed(value: BigDecimal) {
+    this.set("totalRewardDistributed", Value.fromBigDecimal(value));
+  }
+
+  get currentUnlockEndTimestamp(): BigInt {
+    let value = this.get("currentUnlockEndTimestamp");
+    return value.toBigInt();
+  }
+
+  set currentUnlockEndTimestamp(value: BigInt) {
+    this.set("currentUnlockEndTimestamp", Value.fromBigInt(value));
+  }
+
+  get lastRewardTimestamp(): BigInt {
+    let value = this.get("lastRewardTimestamp");
+    return value.toBigInt();
+  }
+
+  set lastRewardTimestamp(value: BigInt) {
+    this.set("lastRewardTimestamp", Value.fromBigInt(value));
+  }
+
+  get lastRewardAmount(): BigDecimal {
+    let value = this.get("lastRewardAmount");
+    return value.toBigDecimal();
+  }
+
+  set lastRewardAmount(value: BigDecimal) {
+    this.set("lastRewardAmount", Value.fromBigDecimal(value));
+  }
 }
 
 export class MPHHolder extends Entity {

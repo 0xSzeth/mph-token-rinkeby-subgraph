@@ -50,6 +50,8 @@ dataSources:
           handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+        - event: DistributeReward(uint256)
+          handler: handleDistributReward
       blockHandlers:
         - handler: handleBlock
       file: xMPHToken/xMPHToken.wasm

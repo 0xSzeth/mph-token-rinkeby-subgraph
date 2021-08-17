@@ -7,6 +7,10 @@ type xMPH @entity {
   id: ID!
   totalSupply: BigDecimal!
   pricePerFullShare: BigDecimal!
+  totalRewardDistributed: BigDecimal!
+  currentUnlockEndTimestamp: BigInt!
+  lastRewardTimestamp: BigInt!
+  lastRewardAmount: BigDecimal!
 }
 
 type MPHHolder @entity {

@@ -36,6 +36,24 @@ export class Approval__Params {
   }
 }
 
+export class DistributeReward extends ethereum.Event {
+  get params(): DistributeReward__Params {
+    return new DistributeReward__Params(this);
+  }
+}
+
+export class DistributeReward__Params {
+  _event: DistributeReward;
+
+  constructor(event: DistributeReward) {
+    this._event = event;
+  }
+
+  get rewardAmount(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
 export class RoleAdminChanged extends ethereum.Event {
   get params(): RoleAdminChanged__Params {
     return new RoleAdminChanged__Params(this);
